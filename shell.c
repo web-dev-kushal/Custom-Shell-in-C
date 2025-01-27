@@ -106,7 +106,6 @@ int shell_launch(char **args) {
     int status;
 
     pid = fork();
-    printf("%d", pid);
     if(pid == 0) {
         //Child
         io_redirection(args);
@@ -118,6 +117,7 @@ int shell_launch(char **args) {
         perror("Shell");
     } else {
         //parent waiting for child
+        // printf("%d", pid);
         do {
             wpid = waitpid(pid, &status, 0);
         } while(!WIFEXITED(status) && !WIFSIGNALED(status));
